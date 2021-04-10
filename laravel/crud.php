@@ -15,7 +15,7 @@ public function delete(Request $request)
 {
     $id =  (int)$request->get("id"); // parameter yang mau di update
     $cek = DB::table("'.$table.'")->where(["id" => $id])->first(); // tulis id yang dituju
-    if($cek->num_rows() > 0)
+    if(isset($cek))
     {
         DB::table("'.$table.'")->where(["id" => $id])->delete();
         return redirect(url())->with("success"," Berhasil Delete Data ! ");
