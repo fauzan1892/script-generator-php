@@ -1,17 +1,17 @@
 <?php
 $html_insert .= '<?php 
-public function store(request $request)
+public function store(Request $request)
 {
     $validator = \Validator::make($request->all(),[
 ';
 $html_update .= '<?php
-public function update(request $request)
+public function update(Request $request)
 {
     $id =  (int)$request->get("id"); // parameter yang mau di update
     $validator = \Validator::make($request->all(),[
 ';
 $html_delete .= '<?php 
-public function delete()
+public function delete(Request $request)
 {
     $id =  (int)$request->get("id"); // parameter yang mau di update
     $cek = DB::table("'.$table.'")->where(["id" => $id])->first(); // tulis id yang dituju
