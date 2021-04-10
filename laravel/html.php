@@ -2,10 +2,10 @@
 if($type == 'textarea')
 {
     $inputmode = '<textarea class="form-control @error("'.$col['name'].'") is-invalid @enderror" name="'.$col['name'].'" id="'.$col['name'].'" placeholder="">{{old("'.$col['name'].'")}}</textarea>';
-    $inputmode_update = '<textarea class="form-control @error("'.$col['name'].'") is-invalid @enderror" name="'.$col['name'].'" id="'.$col['name'].'" placeholder="">{{$edit->'.$col['name'].')}}</textarea>';
+    $inputmode_update = '<textarea class="form-control @error("'.$col['name'].'") is-invalid @enderror" name="'.$col['name'].'" id="'.$col['name'].'" placeholder="">{{$edit->'.$col['name'].'}}</textarea>';
 }else{
     $inputmode = '<input type="'.$type.'" class="form-control @error("'.$col['name'].'") is-invalid @enderror" value="{{old("'.$col['name'].'")}}" name="'.$col['name'].'" id="'.$col['name'].'" placeholder="">';
-    $inputmode_update = '<input type="'.$type.'" class="form-control @error("'.$col['name'].'") is-invalid @enderror" value="{{$edit->'.$col['name'].')}} name="'.$col['name'].'" id="'.$col['name'].'" placeholder="">';
+    $inputmode_update = '<input type="'.$type.'" class="form-control @error("'.$col['name'].'") is-invalid @enderror" value="{{$edit->'.$col['name'].'}} name="'.$col['name'].'" id="'.$col['name'].'" placeholder="">';
 }
 
 if(!empty($_POST['category'] == '1'))
