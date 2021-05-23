@@ -43,7 +43,7 @@ $html_code_update .= '
 <?php
     $id =  (int)$_POST["id"];
     $sql = "SELECT * FROM '.$table.' WHERE id = ?";
-    $row = $connectdb->row($sql);
+    $row = $connectdb->prepare($sql);
     $row->execute(array($id));
     $edit = $row->fetch(PDO::FETCH_OBJ);
 ?>
