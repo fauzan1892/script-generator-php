@@ -19,10 +19,10 @@ $html_delete .= '<?php
         $sql_delete = "DELETE FROM '.$table.' WHERE id = ?";
         $row_delete = $connectdb->prepare($sql_delete);
         $row_delete->execute(array($id));
-        header("Location: ".$baseUrl.'.$table.');
+        header("Location: ".$baseUrl."'.$table.'");
         exit;
     }else{
-        header("Location: ".$baseUrl.'.$table.');
+        header("Location: ".$baseUrl."'.$table.'");
         exit;
     }
 }
@@ -76,13 +76,13 @@ $tanda .= "?,";
 $html_insert .= ' ) VALUES ( '.$tanda.')";
         $row = $connectdb->prepare($sql);
         $row->execute($data);
-        header("Location: ".$baseUrl.'.$table.');
+        header("Location: ".$baseUrl."'.$table.'");
         exit;
 }';
 $html_update .= ' WHERE id = ? ";
 
         $row = $connectdb->prepare($sql);
         $row->execute($data);
-        header("Location: ".$baseUrl.'.$table.');
+        header("Location: ".$baseUrl."'.$table.'");
         exit;
 }';

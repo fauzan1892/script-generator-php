@@ -48,15 +48,15 @@ $html_code_tabel .= '
         }
     $html_code_tabel .= '
                 <td>
-                    <a href="<?= $baseUrl.'.$table.'/detail.php?id=$r->id;?>" 
+                    <a href="<?= $baseUrl."'.$table.'/detail.php?id=".$r->id;?>" 
                         class="btn btn-primary btn-sm" title="Detail">
                         <i class="fa fa-eye"></i> 
                     </a> 
-                    <a href="<?= $baseUrl.'.$table.'/edit.php?id=$r->id;?>" 
+                    <a href="<?= $baseUrl."'.$table.'/edit.php?id=".$r->id;?>" 
                         class="btn btn-success btn-sm" title="Edit">
                         <i class="fa fa-edit"></i> 
                     </a> 
-                    <a href="<?= $baseUrl.'.$table.'/hapus.php?id=$r->id;?>" 
+                    <a href="<?= $baseUrl."'.$table.'/hapus.php?id=".$r->id;?>" 
                         class="btn btn-danger btn-sm" 
                         onclick="javascript:return confirm(`Data ingin dihapus ?`);" title="Delete">
                         <i class="fa fa-times"></i> 
