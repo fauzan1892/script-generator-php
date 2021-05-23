@@ -7,7 +7,7 @@
  * Version   : v1.0.0
  * Website   : https://www.codekop.com/
  * Facebook  : https://www.facebook.com/fauzan.falah2  
- * HP/WA	 : 089618173609
+ * HP/WA	 : +6289618173609
  * E-mail 	 : codekop157@gmail.com / fauzancodekop@gmail.com / fauzan1892@codekop.com
  * 
  * 
@@ -37,6 +37,19 @@ if(!empty($_GET['get']))
     $kolom = $koneksi->prepare("SELECT * FROM $table LIMIT 0");
     $kolom->execute();
 
+if(($_POST['type'] == '5')) {
+// tipe input pakai php native ---
+$html_code_update .= '
+<?php
+    $id =  (int)$_POST["id"];
+    $sql = "SELECT * FROM '.$table.' WHERE id = ?";
+    $row = $connectdb->row($sql);
+    $row->execute(array($id));
+    $edit = $row->fetch(PDO::FETCH_OBJ);
+?>
+';
+}
+    
     // for basic form ---
     for ($i = 0; $i < $kolom->columnCount(); $i++) {
         $col = $kolom->getColumnMeta($i);
@@ -63,6 +76,11 @@ if(!empty($_GET['get']))
         {
             // tipe input pakai laravel ---
             include 'laravel/html.php';
+        }else  if(($_POST['type'] == '5')) {
+
+            // tipe input pakai php native ---
+            include 'native/html.php';
+
         }else{
 
             // tipe input pakai codeigniter 3 ---
@@ -79,6 +97,16 @@ if(!empty($_GET['get']))
         include 'laravel/tabel.php';
 
         $sc = 'Laravel';
+
+    }else if(($_POST['type'] == '5')){
+
+        // tipe input pakai php native ---
+        include 'native/detail.php';
+        include 'native/crud.php';
+        include 'native/tabel.php';
+
+        $sc = 'PHP Native';
+
     }else{
 
         // tipe input pakai codeigniter 3 ---
@@ -87,6 +115,7 @@ if(!empty($_GET['get']))
         include 'ci3/tabel.php';
 
         $sc = 'CodeIgniter 3';
+
     }
 
     // for basic form ---
@@ -112,7 +141,7 @@ if(!empty($_GET['get']))
 <!doctype html>
 <html lang="en">
     <head>
-        <title>CRUD PHP Script Generator dengan Bootstrap</title>
+        <title>CRUD PHP Script Generator with Bootstrap</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -131,13 +160,14 @@ if(!empty($_GET['get']))
     </head>
     <body>
         <div class="container-fluid mt-5 mb-5">
-            <h3 class="text-center text-success"><b>Codekop CRUD PHP Basic Script Generator dengan Bootstrap 4-5</b></h3>
+            <h3 class="text-center text-success"><b>Codekop CRUD PHP Basic Script Generator with Bootstrap 4-5</b></h3>
             <br>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-header text-white bg-info">
-                            <h5 class="card-title pt-2"><b>Atur Form PHP</b> <small class="pl-2">[ Aktifkan Web Server Anda ]</small></h5>
+                            <h5 class="card-title pt-2"><b>Form Setting PHP Connections</b> 
+                            <small class="pl-2">[ Web Server Should be actived ]</small></h5>
                         </div>
                         <div class="card-body">
                             <form method="post" action="index.php?get=proses">
@@ -214,7 +244,7 @@ if(!empty($_GET['get']))
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Kode Array Kolom dengan $_POST</label>
+                                    <label for="">Array Code CRUD with POST</label>
                                     <select class="form-control" name="array" required>
                                         <option value="1" 
                                             <?php   
@@ -244,7 +274,7 @@ if(!empty($_GET['get']))
                                                         echo 'selected';
                                                     }
                                                 }
-                                            ?>>No</option>
+                                            ?>>No Actions</option>
                                         <option value="2"  
                                             <?php   
                                                 if(isset($_POST['type'])){
@@ -262,8 +292,7 @@ if(!empty($_GET['get']))
                                                     }
                                                 }
                                             ?>>Laravel 6-8</option>
-                                        <option value="5" disabled>PHP Native</option>
-                                        <option value="6" disabled>Codekop PHP MVC</option>
+                                        <option value="5">PHP Native</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-md">
@@ -291,7 +320,7 @@ if(!empty($_GET['get']))
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <strong>Script <?= $sc;?> Berhasil di Generate !</strong> 
+                                <strong>Script <?= $sc;?> Generate Successfuly !</strong> 
                             </div>
                         </div>
                         <div class="col-sm-2">
@@ -306,7 +335,7 @@ if(!empty($_GET['get']))
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                                <strong>Silahkan Atur Koneksi dan Tabel nya pada form !</strong> 
+                                <strong>Please setting your connection on the database ( MySQL )</strong> 
                             </div>
                         </div>
 
@@ -317,9 +346,9 @@ if(!empty($_GET['get']))
                             <div class="float-right">
                                 <a class="btn btn-default bg-white text-dark mt-1" 
                                     data-toggle="collapse" href="#ccreate" href="javascript:void(0)" 
-                                    role="button">Lihat</a>
+                                    role="button">Show</a>
                             </div>
-                            <h5 class="card-title pt-2"><b>Hasil Form HTML Create</b></h5>
+                            <h5 class="card-title pt-2"><b>Form HTML Create Result Code </b></h5>
                         </div>
                         <div class="card-body collapse" id="ccreate">
                             <pre class="language-php"><code><?= htmlspecialchars($html_code);?><?= htmlspecialchars($button);?></code></pre>
@@ -331,9 +360,9 @@ if(!empty($_GET['get']))
                             <div class="float-right">
                                 <a class="btn btn-default bg-white text-dark mt-1" 
                                     data-toggle="collapse" href="#ccupdate" href="javascript:void(0)" 
-                                    role="button">Lihat</a>
+                                    role="button">Show</a>
                             </div>
-                            <h5 class="card-title pt-2"><b>Hasil Form HTML Update</b></h5>
+                            <h5 class="card-title pt-2"><b>Form HTML Update Result Code</b></h5>
                         </div>
                         <div class="card-body collapse" id="ccupdate">
                             <pre class="language-php"><code><?= htmlspecialchars($html_code_update);?><?= htmlspecialchars($button);?></code></pre>
@@ -345,9 +374,9 @@ if(!empty($_GET['get']))
                             <div class="float-right">
                                 <a class="btn btn-default bg-white text-dark mt-1" 
                                     data-toggle="collapse" href="#cdetail" href="javascript:void(0)" 
-                                    role="button">Lihat</a>
+                                    role="button">Show</a>
                             </div>
-                            <h5 class="card-title pt-2"><b>Hasil Form HTML Detail</b></h5>
+                            <h5 class="card-title pt-2"><b>Form HTML Details Result Code</b></h5>
                         </div>
                         <div class="card-body collapse" id="cdetail">
                             <pre class="language-php"><code><?= htmlspecialchars($html_code_detail);?></code></pre>
@@ -359,9 +388,9 @@ if(!empty($_GET['get']))
                             <div class="float-right">
                                 <a class="btn btn-default bg-white text-dark mt-1" 
                                     data-toggle="collapse" href="#ctabel" href="javascript:void(0)" 
-                                    role="button">Lihat</a>
+                                    role="button">Show</a>
                             </div>
-                            <h5 class="card-title pt-2"><b>Hasil Form HTML Tabel</b></h5>
+                            <h5 class="card-title pt-2"><b>Form HTML Table Result Code</b></h5>
                         </div>
                         <div class="card-body collapse" id="ctabel">
                             <pre class="language-php"><code><?= htmlspecialchars($html_code_tabel);?></code></pre>
@@ -373,9 +402,9 @@ if(!empty($_GET['get']))
                             <div class="float-right">
                                 <a class="btn btn-default bg-white text-dark mt-1" 
                                     data-toggle="collapse" href="#carray" href="javascript:void(0)" 
-                                    role="button">Lihat</a>
+                                    role="button">Show</a>
                             </div>
-                            <h5 class="card-title pt-2"><b>Hasil Kode Array Kolom dengan $_POST</b></h5>
+                            <h5 class="card-title pt-2"><b>Array Code CRUD with $_POST Result Code</b></h5>
                         </div>
                         <div class="card-body collapse" id="carray">
                             <pre class="language-php"><code><?= htmlspecialchars($html_array);?></code></pre>
@@ -387,9 +416,9 @@ if(!empty($_GET['get']))
                             <div class="float-right">
                                 <a class="btn btn-default bg-white text-dark mt-1" 
                                     data-toggle="collapse" href="#cinsert" href="javascript:void(0)" 
-                                    role="button">Lihat</a>
+                                    role="button">Show</a>
                             </div>
-                            <h5 class="card-title pt-2"><b>Hasil Kode Insert</b></h5>
+                            <h5 class="card-title pt-2"><b>Insert (store) Result Code (CRUD)</b></h5>
                         </div>
                         <div class="card-body collapse" id="cinsert">
                             <pre class="language-php"><code><?= htmlspecialchars($html_insert);?></code></pre>
@@ -401,9 +430,9 @@ if(!empty($_GET['get']))
                             <div class="float-right">
                                 <a class="btn btn-default bg-white text-dark mt-1" 
                                     data-toggle="collapse" href="#cedit" href="javascript:void(0)" 
-                                    role="button">Lihat</a>
+                                    role="button">Show</a>
                             </div>
-                            <h5 class="card-title pt-2"><b>Hasil Kode Update</b></h5>
+                            <h5 class="card-title pt-2"><b>Updated Result Code (CRUD)</b></h5>
                         </div>
                         <div class="card-body collapse" id="cedit">
                             <pre class="language-php"><code><?= htmlspecialchars($html_update);?></code></pre>
@@ -415,9 +444,9 @@ if(!empty($_GET['get']))
                             <div class="float-right">
                                 <a class="btn btn-default bg-white text-dark mt-1" 
                                     data-toggle="collapse" href="#cdel" href="javascript:void(0)" 
-                                    role="button">Lihat</a>
+                                    role="button">Show</a>
                             </div>
-                            <h5 class="card-title pt-2"><b>Hasil Kode Delete</b></h5>
+                            <h5 class="card-title pt-2"><b>Delete Result Code (CRUD)</b></h5>
                         </div>
                         <div class="card-body collapse" id="cdel">
                             <pre class="language-php"><code><?= htmlspecialchars($html_delete);?></code></pre>
