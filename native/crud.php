@@ -61,12 +61,12 @@ $html_update .= '
             // echo $col['native_type'].' =>'.$col['name'].'<br>';
             $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
             if($n == $r){
-$html_insert .= "'".$col['name']."'";   
+$html_insert .= "".$col['name']."";   
 $tanda .= "?";
 $html_update .= "".$col['name']." = ? ";  
             }else{
 
-$html_insert .= "'".$col['name']."',";   
+$html_insert .= "".$col['name'].",";   
 $html_update .= "".$col['name']." = ?, ";  
 $tanda .= "?,";
             }
