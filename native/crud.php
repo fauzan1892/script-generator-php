@@ -25,7 +25,6 @@ $html_delete .= '<?php
         header("Location: ".$baseUrl."'.$table.'");
         exit;
     }
-}
     ';
         // for kolom php native ---
         for ($i = 0; $i < $kolom->columnCount(); $i++) {
@@ -78,11 +77,11 @@ $html_insert .= ' ) VALUES ( '.$tanda.')";
         $row->execute($data);
         header("Location: ".$baseUrl."'.$table.'");
         exit;
-}';
+';
 $html_update .= ' WHERE id = ? ";
 
         $row = $connectdb->prepare($sql);
         $row->execute($data);
         header("Location: ".$baseUrl."'.$table.'");
         exit;
-}';
+';
