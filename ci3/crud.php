@@ -32,11 +32,13 @@ public function delete()
             $col['name'];
             // echo $col['native_type'].' =>'.$col['name'].'<br>';
             $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
-
+            if($col['name']  != 'id')
+            {
 $html_insert .= '
     $this->form_validation->set_rules("'.$col['name'].'", "'.$label.'", "required");';  
 $html_update .= '
     $this->form_validation->set_rules("'.$col['name'].'", "'.$label.'", "required");'; 
+            }
 
         }
 
@@ -56,14 +58,14 @@ $html_update .= '
             $col['name'];
             // echo $col['native_type'].' =>'.$col['name'].'<br>';
             $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
-
+            if($col['name']  != 'id')
+            {
 $html_insert .= "       '".$col['name']."' => ".'htmlspecialchars($this->input->post("'.$col['name'].'", TRUE) ,ENT_QUOTES),
     ';   
 $html_update .= "       '".$col['name']."' => ".'htmlspecialchars($this->input->post("'.$col['name'].'", TRUE) ,ENT_QUOTES),
     ';  
-   
-
             }
+        }
 $html_insert .= '
         ];
 

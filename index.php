@@ -71,20 +71,24 @@ $html_code_update .= '
             $type = 'text';
         }
 
-        // tipe pakai laravel ---
-        if(($_POST['type'] == '4'))
+        if($col['name']  != 'id')
         {
-            // tipe input pakai laravel ---
-            include 'laravel/html.php';
-        }else  if(($_POST['type'] == '5')) {
+            // tipe pakai laravel ---
+            if(($_POST['type'] == '4'))
+            {
+                // tipe input pakai laravel ---
+                include 'laravel/html.php';
+                
+            }else  if(($_POST['type'] == '5')) {
 
-            // tipe input pakai php native ---
-            include 'native/html.php';
+                // tipe input pakai php native ---
+                include 'native/html.php';
 
-        }else{
+            }else{
 
-            // tipe input pakai codeigniter 3 ---
-            include 'ci3/html.php';
+                // tipe input pakai codeigniter 3 ---
+                include 'ci3/html.php';
+            }
         }
     } 
 

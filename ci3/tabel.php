@@ -13,9 +13,11 @@ $html_code_tabel .= '
             $col['name'];
             // echo $col['native_type'].' =>'.$col['name'].'<br>';
             $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
-
+            if($col['name']  != 'id')
+            {
     $html_code_tabel .= '
                 <th>'.$col['name'].'</th>';  
+            }
 
         }
 
@@ -37,10 +39,11 @@ $html_code_tabel .= '
             $col['name'];
             // echo $col['native_type'].' =>'.$col['name'].'<br>';
             $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
-
+            if($col['name']  != 'id')
+            {
     $html_code_tabel .= '      
                 <td><?=$r->'.$col['name'].';?></td>';  
-
+            }
         }
     $html_code_tabel .= '
                 <td>

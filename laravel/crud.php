@@ -32,11 +32,13 @@ public function delete(Request $request)
         $col['name'];
         // echo $col['native_type'].' =>'.$col['name'].'<br>';
         $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
-
+        if($col['name']  != 'id')
+        {
 $html_insert .= '       "'.$col['name'].'" => "required",
 ';  
 $html_update .= '       "'.$col['name'].'" => "required",
 ';  
+        }
 
     }
 
@@ -60,11 +62,14 @@ $html_update .= '
         $col['name'];
         // echo $col['native_type'].' =>'.$col['name'].'<br>';
         $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
+        if($col['name']  != 'id')
+        {
 
 $html_insert .= "           '".$col['name']."' => ".'$request->get("'.$col['name'].'"),
 ';   
 $html_update .= "           '".$col['name']."' => ".'$request->get("'.$col['name'].'"),
 ';  
+        }
     }
 
 $html_insert .= '
