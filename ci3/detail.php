@@ -15,7 +15,7 @@ $html_code_detail .= '
         {
 $html_code_detail .= '      
         <tr>
-            <td scope="row">'.$col['name'].'</td>
+            <td scope="row">'.$label.'</td>
             <td>:</td>
             <td><?= $edit->'.$col['name'].';?></td>
         </tr>

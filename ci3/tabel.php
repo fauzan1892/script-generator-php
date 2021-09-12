@@ -16,7 +16,7 @@ $html_code_tabel .= '
             if($col['name']  != 'id')
             {
     $html_code_tabel .= '
-                <th>'.$col['name'].'</th>';  
+                <th>'.$label.'</th>';  
             }
 
         }
