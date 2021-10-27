@@ -12,7 +12,7 @@ $html_code_detail .= '
         if($col['name']  != 'id')
         {
 $html_code_detail .= '      
-        <div>
+        <div class="row">
             <div class="col-6">'.$label.'</div>
             <div class="col-6"><?= $edit->'.$col['name'].';?></div>
         </div>
