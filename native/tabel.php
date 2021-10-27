@@ -15,7 +15,7 @@ $html_code_tabel .= '
             $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
 
     $html_code_tabel .= '
-                <th>'.$col['name'].'</th>';  
+                <th>'.$label.'</th>';  
 
         }
 
