@@ -18,7 +18,6 @@ $html_code_tabel .= '
     $html_code_tabel .= '
                 <th>'.$label.'</th>';  
             }
-
         }
 
     $html_code_tabel .= '
@@ -26,12 +25,10 @@ $html_code_tabel .= '
             </tr>
         </thead>
         <tbody>
-            <?php 
-                $no =1;
-                foreach($'.$table.' as $r){
-            ?>
+            @php $no =1;@endphp
+            @foreach($'.$table.' as $r)
             <tr>
-                <td><?= $no;?></td>
+                <td>{{$no}}</td>
     ';
         // for kolom crud laravel --
         for ($i = 0; $i < $kolom->columnCount(); $i++) {
@@ -42,27 +39,28 @@ $html_code_tabel .= '
             if($col['name']  != 'id')
             {
     $html_code_tabel .= '      
-                <td><?=$r->'.$col['name'].';?></td>';  
+                <td>{{$r->'.$col['name'].'}}</td>';  
             }
         }
     $html_code_tabel .= '
                 <td>
-                    <a href="<?=base_url("'.$table.'/detail/$r->id");?>" 
+                    <a href="{{url("'.$baseurl.'/detail/$r->id")}}" 
                         class="btn btn-primary btn-sm" title="Detail">
                         <i class="fa fa-eye"></i> 
-                    </a> 
-                    <a href="<?= base_url("'.$table.'/edit/$r->id");?>" 
+                    </a>   
+                    <a href="{{url("'.$baseurl.'/edit/$r->id")}}" 
                         class="btn btn-success btn-sm" title="Edit">
-                        <i class="fa fa-edit"></i> 
-                    </a> 
-                    <a href="<?= base_url("'.$table.'/delete?id=$r->id");?>" 
+                        <i class="fa fa-edit"></i>  
+                    </a>   
+                    <a href="{{url("'.$baseurl.'/delete?id=$r->id")}}" 
                         class="btn btn-danger btn-sm" 
                         onclick="javascript:return confirm(`Data ingin dihapus ?`);" title="Delete">
                         <i class="fa fa-times"></i> 
                     </a>
                 </td>
             </tr>
-            <?php $no++; }?>
+            @php $no++;@endphp
+            @endforeach
         </tbody>
     </table>
 </div>

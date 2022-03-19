@@ -12,7 +12,7 @@ if(!empty($_POST['category'] == '1'))
 {
     $html_code .= '
     <div class="form-group">
-        <label for="">'.$label.'</label>
+        <label for="'.$col['name'].'">'.$label.'</label>
         '.$inputmode.'
         @error("'.$col['name'].'")
             <span class="text-danger">{{ $message }}</span>
@@ -21,8 +21,11 @@ if(!empty($_POST['category'] == '1'))
     ';
     $html_code_update .= '
     <div class="form-group">
-        <label for="">'.$label.'</label>
+        <label for="'.$col['name'].'">'.$label.'</label>
         '.$inputmode_update.'
+        @error("'.$col['name'].'")
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
     </div>
     ';
 }else{
@@ -30,7 +33,7 @@ if(!empty($_POST['category'] == '1'))
     // result kode html create horizontal form ---
 $html_code .= '
     <div class="form-group row">
-        <label for="" class="col-sm-3 col-form-label">'.$label.'</label>
+        <label for="'.$col['name'].'" class="col-sm-3 col-form-label">'.$label.'</label>
         <div class="col-sm-9">
             '.$inputmode.'
             @error("'.$col['name'].'")
@@ -43,7 +46,7 @@ $html_code .= '
 // result kode html update horizontal form ---
 $html_code_update .= '
     <div class="form-group row">
-        <label for="" class="col-sm-3 col-form-label">'.$label.'</label>
+        <label for="'.$col['name'].'" class="col-sm-3 col-form-label">'.$label.'</label>
         <div class="col-sm-9">
             '.$inputmode_update.'
         </div>

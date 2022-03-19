@@ -74,7 +74,7 @@ $html_update .= "           '".$col['name']."' => ".'$request->get("'.$col['name
 
 $html_insert .= '
         ]);
-        return redirect(url())->with("success"," Berhasil Insert Data ! ");
+        return redirect()->back()->with("success"," Berhasil Insert Data ! ");
     }else{
         return redirect()->back()
         ->withErrors($validator)
@@ -83,7 +83,7 @@ $html_insert .= '
 }';
 $html_update .= '
         ]);
-        return redirect(url())->with("success"," Berhasil Update Data ! ");
+        return redirect()->back()->with("success"," Berhasil Update Data ! ");
     }else{
         return redirect()->back()
         ->withErrors($validator)

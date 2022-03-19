@@ -13,13 +13,13 @@ if(!empty($_POST['category'] == '1'))
 
 $html_code .= '
 <div class="form-group">
-    <label for="">'.$label.'</label>
+    <label for="'.$col['name'].'">'.$label.'</label>
     '.$inputmode.'
 </div>
 ';
 $html_code_update .= '
 <div class="form-group">
-    <label for="">'.$label.'</label>
+    <label for="'.$col['name'].'">'.$label.'</label>
     '.$inputmode_update.'
 </div>
 ';
@@ -29,7 +29,7 @@ $html_code_update .= '
 // result kode html create horizontal form ---
 $html_code .= '
 <div class="form-group row">
-    <label for="" class="col-sm-3 col-form-label">'.$label.'</label>
+    <label for="'.$col['name'].'" class="col-sm-3 col-form-label">'.$label.'</label>
     <div class="col-sm-9">
         '.$inputmode.'
     </div>
@@ -39,7 +39,7 @@ $html_code .= '
 // result kode html update horizontal form ---
 $html_code_update .= '
 <div class="form-group row">
-    <label for="" class="col-sm-3 col-form-label">'.$label.'</label>
+    <label for="'.$col['name'].'" class="col-sm-3 col-form-label">'.$label.'</label>
     <div class="col-sm-9">
         '.$inputmode_update.'
     </div>

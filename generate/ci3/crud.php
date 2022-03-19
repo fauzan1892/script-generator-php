@@ -19,10 +19,10 @@ public function delete()
         $this->db->where("id",$id); // tulis id yang dituju
         $this->db->delete("'.$table.'");
         $this->session->set_flashdata("success"," Berhasil Delete Data ! ");
-        redirect(base_url("'.$table.'"));
+        redirect(base_url("'.$baseurl.'"));
     }else{
         $this->session->set_flashdata("failed"," Gagal Delete Data ! ".validation_errors());
-        redirect(base_url("'.$table.'"));
+        redirect(base_url("'.$baseurl.'"));
     }
 }
     ';
@@ -71,21 +71,21 @@ $html_insert .= '
 
         $this->db->insert("'.$table.'", $data);
         $this->session->set_flashdata("success"," Berhasil Insert Data ! ");
-        redirect(base_url("'.$table.'"));
+        redirect(base_url("'.$baseurl.'"));
     }else{
         $this->session->set_flashdata("failed"," Gagal Insert Data ! ".validation_errors());
-        redirect(base_url("'.$table.'"));
+        redirect(base_url("'.$baseurl.'"));
     }
 }';
 $html_update .= '
         ];
 
         $this->db->where("id", $id); // ubah id dan postnya
-        $this->db->update("'.$table.'", $data);
+        $this->db->update("'.$baseurl.'", $data);
         $this->session->set_flashdata("success"," Berhasil Update Data ! ");
-        redirect(base_url("'.$table.'/edit/".$id));
+        redirect(base_url("'.$baseurl.'/edit/".$id));
     }else{
         $this->session->set_flashdata("failed"," Gagal Update Data ! ".validation_errors());
-        redirect(base_url("'.$table.'/edit/".$id));
+        redirect(base_url("'.$baseurl.'/edit/".$id));
     }
 }';

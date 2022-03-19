@@ -75,13 +75,13 @@ $tanda .= "?,";
 $html_insert .= ' ) VALUES ( '.$tanda.')";
         $row = $connectdb->prepare($sql);
         $row->execute($data);
-        header("Location: ".$baseUrl."'.$table.'");
+        header("Location: ".$baseUrl."'.$baseurl.'");
         exit;
 ';
 $html_update .= ' WHERE id = ? ";
 
         $row = $connectdb->prepare($sql);
         $row->execute($data);
-        header("Location: ".$baseUrl."'.$table.'");
+        header("Location: ".$baseUrl."'.$baseurl.'");
         exit;
 ';
