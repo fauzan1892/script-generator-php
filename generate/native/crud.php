@@ -1,13 +1,14 @@
 <?php
 
-$html_insert .= '<?php 
+$html_insert .= '
+<?php 
 // insert store data records code php
     ';
-$html_update .= '<?php
+$html_update .= '
 // update data records code php
 $id =  (int)$_POST["id"]; // should be integer (id)
     ';
-$html_delete .= '<?php 
+$html_delete .= '
 // removed (deleted) data records code php
     $id =  (int)$_POST["id"]; // should be integer (id)
     $sql = "SELECT * FROM '.$table.' WHERE id = ?";

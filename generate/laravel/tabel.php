@@ -64,4 +64,5 @@ $html_code_tabel .= '
         </tbody>
     </table>
 </div>
+{{ $'.$table.'->links() }}
 ';

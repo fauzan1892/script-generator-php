@@ -34,70 +34,71 @@ if(!empty($_GET['get']))
     
     // table sql ---
     $table = $_POST['table'];
+    $class = ucfirst($_POST['table']);
     $baseurl = $_POST['url'];
     $kolom = $koneksi->prepare("SELECT * FROM $table LIMIT 0");
     $kolom->execute();
 
-if(($_POST['type'] == '5')) {
-// tipe input pakai php native ---
-$html_code_update .= '
-<?php
-    $id =  (int)$_POST["id"];
-    $sql = "SELECT * FROM '.$table.' WHERE id = ?";
-    $row = $connectdb->prepare($sql);
-    $row->execute(array($id));
-    $edit = $row->fetch(PDO::FETCH_OBJ);
-?>
-';
-}
-// for basic form ---
-for ($i = 0; $i < $kolom->columnCount(); $i++) {
-    $col = $kolom->getColumnMeta($i);
-    $col['name'];
-    // echo $col['native_type'].' =>'.$col['name'].'<br>';
-    $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
-
-    //tipe kolom
-    if($col['native_type'] == 'LONG')
-    {
-    $type = 'number';
-    }else if($col['native_type'] == 'BLOB'){
-    $type = 'textarea';
-    }else if($col['native_type'] == 'DATE'){
-    $type = 'date';
-    }else if($col['native_type'] == 'TIMESTAMP'){
-    $type = 'datetime-local';
-    }else{
-    $type = 'text';
-    }
-
-    if($col['name'] != 'id')
-    {
-    // tipe pakai laravel ---
-    if(($_POST['type'] == '4')){
-    // tipe input pakai laravel ---
-    include 'generate/laravel/html.php';
-    }elseif(($_POST['type'] == '5')) {
+    if(($_POST['type'] == '5')) {
     // tipe input pakai php native ---
-    include 'generate/native/html.php';
-    }else{
-    // tipe input pakai codeigniter 3 ---
-    include 'generate/ci3/html.php';
+    $html_code_update .= '
+    <?php
+        $id =  (int)$_POST["id"];
+        $sql = "SELECT * FROM '.$table.' WHERE id = ?";
+        $row = $connectdb->prepare($sql);
+        $row->execute(array($id));
+        $edit = $row->fetch(PDO::FETCH_OBJ);
+    ?>
+    ';
     }
-    }
-    }
+    // for basic form ---
+    for ($i = 0; $i < $kolom->columnCount(); $i++) {
+        $col = $kolom->getColumnMeta($i);
+        $col['name'];
+        // echo $col['native_type'].' =>'.$col['name'].'<br>';
+        $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
 
+        //tipe kolom
+        if($col['native_type'] == 'LONG')
+        {
+            $type = 'number';
+        }else if($col['native_type'] == 'BLOB'){
+            $type = 'textarea';
+        }else if($col['native_type'] == 'DATE'){
+            $type = 'date';
+        }else if($col['native_type'] == 'TIMESTAMP'){
+            $type = 'datetime-local';
+        }else{
+            $type = 'text';
+        }
+
+        if($col['name'] != 'id')
+        {
+        // tipe pakai laravel ---
+            if(($_POST['type'] == '4')){
+                // tipe input pakai laravel ---
+                include 'generate/laravel/html.php';
+            }elseif(($_POST['type'] == '5')) {
+                // tipe input pakai php native ---
+                include 'generate/native/html.php';
+            }else{
+                // tipe input pakai codeigniter 3 ---
+                include 'generate/ci3/html.php';
+            }
+        }
+    }
     // tipe pakai laravel ---
     if(($_POST['type'] == '4')){
-    // tipe input pakai laravel ---
-    include 'generate/laravel/detail.php';
-    include 'generate/laravel/crud.php';
-    include 'generate/laravel/tabel.php';
+        // tipe input pakai laravel ---
+        include 'generate/laravel/controller.php';
+        include 'generate/laravel/detail.php';
+        include 'generate/laravel/crud.php';
+        include 'generate/laravel/tabel.php';
 
-    $sc = 'Laravel';
-    $formmethod = "<form method='POST' action='{{ url('') }}'> @csrf";
+        $sc = 'Laravel';
+        $formmethod = "<form method='POST' action='{{ url('') }}'> @csrf";
 
-        }else if(($_POST['type'] == '5')){
+    }else if(($_POST['type'] == '5')){
         // tipe input pakai php native ---
         include 'generate/native/detail.php';
         include 'generate/native/crud.php';
@@ -106,38 +107,47 @@ for ($i = 0; $i < $kolom->columnCount(); $i++) {
         $sc = 'PHP Native';
         $formmethod = "<form method='POST' action=''>";
 
-            }else{
-            // tipe input pakai codeigniter 3 ---
-            include 'generate/ci3/crud.php';
-            include 'generate/ci3/detail.php';
-            include 'generate/ci3/tabel.php';
+    }else  if(($_POST['type'] == '3')){
+        // tipe input pakai codeigniter 4 ---
+        include 'generate/ci4/controller.php';
+        include 'generate/ci4/crud.php';
+        include 'generate/ci4/detail.php';
+        include 'generate/ci4/tabel.php';
 
-            $sc = 'CodeIgniter 3';
-            $formmethod = "<form method='POST' action='<?= base_url('');?>'>";
+        $sc = 'CodeIgniter 4';
+        $formmethod = "<form method='POST' action='<?= base_url('');?>'>";
+    }else{
+        // tipe input pakai codeigniter 3 ---
+        include 'generate/ci3/controller.php';
+        include 'generate/ci3/crud.php';
+        include 'generate/ci3/detail.php';
+        include 'generate/ci3/tabel.php';
 
-                }
-                // for basic form ---
-                if(!empty($_POST['category'] == '1')){
-                // button tipe left
-                $button = '<button class="btn btn-primary btn-md">Save</button></form>';
-            }else{
-            // button tipe right
-            $button = '<button class="btn btn-primary btn-md float-right">Save</button></form>';
-        }
+        $sc = 'CodeIgniter 3';
+        $formmethod = "<form method='POST' action='<?= base_url('');?>'>";
+
+    }
+    // for basic form ---
+    if(!empty($_POST['category'] == '1')){
+        // button tipe left
+        $button = '<button class="btn btn-primary btn-md">Save</button></form>';
+    }else{
+        // button tipe right
+        $button = '<button class="btn btn-primary btn-md float-right">Save</button></form>';
+    }
 
         // array from CRUD
-        if(!empty($_POST['array'] == '2'))
-        {
+    if(!empty($_POST['array'] == '2'))
+    {
         include 'crud_array.php';
-        }else{
+    }else{
         $html_array = 'No Result';
-        }
-        // end crud laravel --
-        }
-        ?>
-        <!doctype html>
-        <html lang="en">
-
+    }
+    // end crud laravel --
+}
+?>
+<!doctype html>
+    <html lang="en">
         <head>
             <title>CRUD PHP Script Generator with Bootstrap</title>
             <!-- Required meta tags -->
@@ -160,7 +170,6 @@ for ($i = 0; $i < $kolom->columnCount(); $i++) {
             }
             </style>
         </head>
-
         <body>
             <div class="container mt-5 mb-5">
                 <h3 class="text-center text-success"><b>Codekop CRUD PHP Basic Script Generator with Bootstrap 4-5</b>
@@ -300,15 +309,27 @@ for ($i = 0; $i < $kolom->columnCount(); $i++) {
                                                     }
                                                 }
                                             ?>>CodeIgniter 3</option>
-                                                    <option value="3" disabled>CodeIgniter 4</option>
+                                                    <option value="3" <?php   
+                                                if(isset($_POST['type'])){
+                                                    if($_POST['type'] == '3'){ 
+                                                        echo 'selected';
+                                                    }
+                                                }
+                                            ?>>CodeIgniter 4</option>
                                                     <option value="4" <?php   
                                                 if(isset($_POST['type'])){
                                                     if($_POST['type'] == '4'){ 
                                                         echo 'selected';
                                                     }
                                                 }
-                                            ?>>Laravel 6-8</option>
-                                                    <option value="5">PHP Native</option>
+                                            ?>>Laravel</option>
+                                                    <option value="5"" <?php   
+                                                if(isset($_POST['type'])){
+                                                    if($_POST['type'] == '5'){ 
+                                                        echo 'selected';
+                                                    }
+                                                }
+                                            ?>>PHP Native</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -392,7 +413,15 @@ for ($i = 0; $i < $kolom->columnCount(); $i++) {
                                         <a class="nav-link" id="controller-tab" data-toggle="tab" href="#controller"
                                             role="tab" aria-controls="controller" aria-selected="true">Base Controller</a>
                                     </li>
-                                    <li class="nav-item" role="presentation">
+                                    <li class="nav-item" role="model">
+                                        <a class="nav-link" id="model-tab" data-toggle="tab" href="#model"
+                                            role="tab" aria-controls="model" aria-selected="true">Model</a>
+                                    </li>
+                                    <li class="nav-item" role="route">
+                                        <a class="nav-link" id="route-tab" data-toggle="tab" href="#route"
+                                            role="tab" aria-controls="route" aria-selected="true">Route</a>
+                                    </li>
+                                    <!-- <li class="nav-item" role="presentation">
                                         <a class="nav-link" id="insert-tab" data-toggle="tab" href="#insert"
                                             role="tab" aria-controls="insert" aria-selected="true">Insert</a>
                                     </li>
@@ -403,7 +432,7 @@ for ($i = 0; $i < $kolom->columnCount(); $i++) {
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link" id="delete-tab" data-toggle="tab" href="#delete" role="tab"
                                             aria-controls="delete" aria-selected="false">Delete</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="create" role="tabpanel"
@@ -430,9 +459,21 @@ for ($i = 0; $i < $kolom->columnCount(); $i++) {
                                     <div class="tab-pane fade" id="controller" role="tabpanel"
                                         aria-labelledby="controller-tab">
                                         <pre
+                                            class="language-php"><code>
+                                            <?= htmlspecialchars($controllers_build ?? '');?>
+                                            <?= htmlspecialchars($html_insert);?>
+                                            <?= htmlspecialchars($html_update);?>
+                                            <?= htmlspecialchars($html_delete);?></code></pre>
+                                    </div>
+                                    <div class="tab-pane fade" id="model" role="tabpanel" aria-labelledby="model-tab">
+                                        <pre
                                             class="language-php"><code></code></pre>
                                     </div>
-                                    <div class="tab-pane fade" id="insert" role="tabpanel"
+                                    <div class="tab-pane fade" id="route" role="tabpanel" aria-labelledby="route-tab">
+                                        <pre
+                                            class="language-php"><code></code></pre>
+                                    </div>
+                                    <!-- <div class="tab-pane fade" id="insert" role="tabpanel"
                                         aria-labelledby="insert-tab">
                                         <pre
                                             class="language-php"><code><?= htmlspecialchars($html_insert);?></code></pre>
@@ -444,7 +485,7 @@ for ($i = 0; $i < $kolom->columnCount(); $i++) {
                                     <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="delete-tab">
                                         <pre
                                             class="language-php"><code><?= htmlspecialchars($html_delete);?></code></pre>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
