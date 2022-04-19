@@ -199,33 +199,35 @@ if(!empty($_GET['get']))
                                             <div class="form-group">
                                                 <label for="">Host</label>
                                                 <input type="text" class="form-control" name="host"
-                                                    placeholder="localhost" value="localhost" required>
+                                                    placeholder="localhost" id="host" value="localhost" required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">User</label>
                                                 <input type="text"
                                                     value="<?php if(isset($_POST['user'])){ echo $_POST['user'];}?>"
-                                                    class="form-control" name="user" placeholder="root" value="root"
+                                                    class="form-control" name="user" id="user" placeholder="root" value="root"
                                                     required>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Password</label>
                                                 <input type="password"
                                                     value="<?php if(isset($_POST['pass'])){ echo $_POST['pass'];}?>"
-                                                    class="form-control" name="pass" placeholder="Your Password">
+                                                    class="form-control" name="pass" id="pass" placeholder="Your Password">
                                             </div>
                                             <div class="form-group">
                                                 <label for="">DB Name</label>
-                                                <input type="text"
-                                                    value="<?php if(isset($_POST['dbname'])){ echo $_POST['dbname'];}?>"
-                                                    class="form-control" name="dbname"
-                                                    placeholder="Example : codekop_crud" required>
+                                                <select id="dbname" name="dbname" class="form-control" required>
+                                                    <option value="" readonly>Select DB Name</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Table Name</label>
-                                                <input type="text" class="form-control"
+                                                <select id="table" name="table" class="form-control" required>
+                                                    <option value="" readonly>Select Table Name</option>
+                                                </select>
+                                                <!-- <input type="text" class="form-control"
                                                     value="<?php if(isset($_POST['table'])){ echo $_POST['table'];}?>"
-                                                    name="table" placeholder="Example : tbl_article" required>
+                                                    name="table" placeholder="Example : tbl_article" required> -->
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -505,9 +507,10 @@ if(!empty($_GET['get']))
                 </div>
                 <!-- Optional JavaScript -->
                 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+                <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
                 <script type="text/javascript" src="prism.js"></script>
+                <?php include 'js.php';?>
         </body>
         </html>
