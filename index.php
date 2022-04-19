@@ -219,6 +219,10 @@ if(!empty($_GET['get']))
                                                 <select id="dbname" name="dbname" class="form-control" required>
                                                     <option value="" readonly>Select DB Name</option>
                                                 </select>
+                                                <!-- <input type="text"
+                                                    value="<?php if(isset($_POST['dbname'])){ echo $_POST['dbname'];}?>"
+                                                    class="form-control" name="dbname"
+                                                    placeholder="Example : codekop_crud" required> -->
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Table Name</label>

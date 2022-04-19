@@ -34,6 +34,12 @@
             },
             dataType: 'json',
             success: function (result) {
+                $('#dbname')
+                    .find('option')
+                    .remove()
+                    .end()
+                    .append('<option value="" disabled>Select DB Name</option>')
+                    .val('');
                 $.each(result, function (i, data) {
                     $('#dbname').append('<option>' + data + '</option>');
                 });
@@ -57,6 +63,12 @@
             },
             dataType: 'json',
             success: function (result) {
+                $('#table')
+                    .find('option')
+                    .remove()
+                    .end()
+                    .append('<option value="" disabled>Select DB Name</option>')
+                    .val('');
                 $.each(result, function (i, data) {
                     $('#table').append('<option>' + data + '</option>');
                 });

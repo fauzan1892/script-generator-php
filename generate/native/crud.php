@@ -2,14 +2,14 @@
 
 $html_insert .= '
 <?php 
-// insert store data records code php
+    // insert store data records code php
     ';
 $html_update .= '
-// update data records code php
-$id =  (int)$_POST["id"]; // should be integer (id)
+    // update data records code php
+     $id =  (int)$_POST["id"]; // should be integer (id)
     ';
 $html_delete .= '
-// removed (deleted) data records code php
+    // removed (deleted) data records code php
     $id =  (int)$_POST["id"]; // should be integer (id)
     $sql = "SELECT * FROM '.$table.' WHERE id = ?";
     $row = $connectdb->prepare($sql);
@@ -42,17 +42,17 @@ $html_delete .= '
     // echo $col['native_type'].' =>'.$col['name'].'<br>';
     $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
 
-$html_insert .= '        $data[] =  htmlspecialchars($_POST["'.$col['name'].'"]);
+$html_insert .= '     $data[] =  htmlspecialchars($_POST["'.$col['name'].'"]);
 ';   
-$html_update .= '        $data[] =  htmlspecialchars($_POST["'.$col['name'].'"]);
+$html_update .= '     $data[] =  htmlspecialchars($_POST["'.$col['name'].'"]);
 ';    
         }
 
 $html_insert .= '
-        $sql = "INSERT INTO '.$table.' (';
+    $sql = "INSERT INTO '.$table.' (';
 $html_update .= '
-        $data[] = $id;
-        $sql = "UPDATE '.$table.' SET ';
+    $data[] = $id;
+    $sql = "UPDATE '.$table.' SET ';
         $n = $kolom->columnCount();
         $r = 1;
         for ($i = 0; $i < $kolom->columnCount(); $i++) {
@@ -74,15 +74,14 @@ $tanda .= "?,";
         }
        
 $html_insert .= ' ) VALUES ( '.$tanda.')";
-        $row = $connectdb->prepare($sql);
-        $row->execute($data);
-        header("Location: ".$baseUrl."'.$baseurl.'");
-        exit;
+    $row = $connectdb->prepare($sql);
+    $row->execute($data);
+    header("Location: ".$baseUrl."'.$baseurl.'");
+    exit;
 ';
 $html_update .= ' WHERE id = ? ";
-
-        $row = $connectdb->prepare($sql);
-        $row->execute($data);
-        header("Location: ".$baseUrl."'.$baseurl.'");
-        exit;
+    $row = $connectdb->prepare($sql);
+    $row->execute($data);
+    header("Location: ".$baseUrl."'.$baseurl.'");
+    exit;
 ';
