@@ -408,7 +408,7 @@ if(!empty($_GET['get']))
                                             aria-controls="detail" aria-selected="false">HTML Detail</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="table-tab" data-toggle="tab" href="#table" role="tab"
+                                        <a class="nav-link" id="table-tab" data-toggle="tab" href="#table12" role="tab"
                                             aria-controls="table" aria-selected="false">HTML Table</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
@@ -454,7 +454,7 @@ if(!empty($_GET['get']))
                                         <pre
                                             class="language-php"><code><?= htmlspecialchars($html_code_detail);?></code></pre>
                                     </div>
-                                    <div class="tab-pane fade" id="table" role="tabpanel" aria-labelledby="table-tab">
+                                    <div class="tab-pane fade" id="table12" role="tabpanel" aria-labelledby="table-tab">
                                         <pre
                                             class="language-php"><code><?= htmlspecialchars($html_code_tabel);?></code></pre>
                                     </div>
