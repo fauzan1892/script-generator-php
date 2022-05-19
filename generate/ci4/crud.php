@@ -8,23 +8,24 @@ $html_insert .= '
 $html_update .= '
     public function update()
     {
+        $val = $this->validate([
     ';
 $html_delete .= '
     public function delete($id)
     {
-        $edit = $model->get_where("'.$table.'",["id" => $id])->getRow();
+        $edit = $this->'.$table.'->get'.$class.'($id)->getRow();
         if(isset($edit))
         {
             $builder = $this->db->table("'.$table.'");
             $builder->delete(["id" => $id]);
 
             $this->session->setFlashdata("success", "Berhasil Hapus Data !");
-            return redirect()->to(base_url("'.$table.'"));  
+            return redirect()->to(base_url("'.$baseurl.'"));  
 			// echo json_encode(["cek" => "success", "msg" => "Berhasil Hapus Data ! "]);
         }else{
 
             $this->session->setFlashdata("failed","ID : ".$id." cannot be found.");
-            return redirect()->to(base_url("'.$table.'"));
+            return redirect()->to(base_url("'.$baseurl.'"));
 			// echo json_encode(["cek" => "error", "msg" => "Data Tidak Ditemukan ! "]);
         }
     }
@@ -83,9 +84,9 @@ $html_insert .= '
             return redirect()->to(base_url("'.$baseurl.'"));
 			// echo json_encode(["cek" => "success", "msg" => "Berhasil Tambah Data ! "]);
         }else{
-            $this->session->setFlashdata("failed"," Gagal Tambah Data ! ".$this->validation->listErrors());
+            $this->session->setFlashdata("failed"," Gagal Tambah Data ! ".\Config\Services::validation()->listErrors());
             return redirect()->to(base_url("'.$baseurl.'"));
-            // echo json_encode(["cek" => "error", "msg" => "".$this->validation->listErrors()]);
+            // echo json_encode(["cek" => "error", "msg" => "".\Config\Services::validation()->listErrors()]);
         }
     }';
 $html_update .= '
@@ -98,8 +99,8 @@ $html_update .= '
             return redirect()->to(base_url("'.$baseurl.'/edit/".$id));
 			// echo json_encode(["cek" => "success", "msg" => "Berhasil Update Data ! "]);
         }else{
-            $this->session->setFlashdata("failed"," Gagal Update Data ! ".$this->validation->listErrors());
+            $this->session->setFlashdata("failed"," Gagal Update Data ! ".\Config\Services::validation()->listErrors());
             return redirect()->to(base_url("'.$baseurl.'/edit/".$id));
-            // echo json_encode(["cek" => "error", "msg" => "".$this->validation->listErrors()]);
+            // echo json_encode(["cek" => "error", "msg" => "".\Config\Services::validation()->listErrors()]);
         }
     }';

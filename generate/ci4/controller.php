@@ -47,7 +47,7 @@ class '.$class.' extends BaseController
 
     public function edit($id)
     {
-        $edit = $this->$'.$table.'->get'.$class.'($id)->getRow();
+        $edit = $this->'.$table.'->get'.$class.'($id)->getRow();
         if($edit){
             $this->data["edit"] = $edit;
             // $this->data["title_web"] = "Edit - '.$class.'";
@@ -57,7 +57,7 @@ class '.$class.' extends BaseController
 			view("contents/'.$baseurl.'/edit",$this->data);
         }else{
             echo "<br><h4 class="text-center"> Data Not Found !</h4><br>";
-            // $this->session->setFlashdata("success"," Data Not Found ! ");
+            // $this->session->setFlashdata("failed"," Data Not Found ! ");
             // return redirect()->to(base_url("'.$baseurl.'"));
         }
     }
