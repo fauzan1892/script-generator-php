@@ -6,11 +6,13 @@ $html_insert .= '
         $val = $this->validate([
     ';
 $html_update .= '
+
     public function update()
     {
         $val = $this->validate([
     ';
 $html_delete .= '
+
     public function delete($id)
     {
         $edit = $this->'.$table.'->get'.$class.'($id)->getRow();
@@ -39,12 +41,13 @@ $html_delete .= '
             $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
             if($col['name']  != 'id')
             {
+                if($col['native_type'] == 'TIMESTAMP') { }else{
 $html_insert .= '           "'.$col['name'].'" => "required",
 ';  
 $html_update .= '           "'.$col['name'].'" => "required",
 ';  
+                }
             }
-
         }
 
 $html_insert .= '
@@ -69,10 +72,19 @@ $html_update .= '
             $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
             if($col['name']  != 'id')
             {
+                if($col['native_type'] == 'TIMESTAMP')
+                {
+$html_insert .= "           '".$col['name']."' => ".'date("Y-m-d H:i:s"),
+';   
+$html_update .= "           '".$col['name']."' => ".'date("Y-m-d H:i:s"),
+';
+                }else{
+                    
 $html_insert .= "           '".$col['name']."' => ".'$this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_STRING),
     ';   
 $html_update .= "           '".$col['name']."' => ".'$this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_STRING),
     ';  
+                }
             }
         }
 $html_insert .= '

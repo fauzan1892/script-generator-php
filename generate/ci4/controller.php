@@ -6,7 +6,7 @@ $controllers_build = '
  * 
  * @link       https://www.codekop.com/
  * @version    1.0.1
- * @copyright  (c) '.date('Y').'
+ * @copyright  Codekop Generator (c) '.date('Y').'
  * 
  * File      : '.$class.'.php
  * Web Name  : App Name
@@ -16,7 +16,7 @@ $controllers_build = '
  * 
 **/
 namespace App\Controllers;
-use App\Models\ '.$class.';
+use App\Models\R!@#'.$class.';
 
 class '.$class.' extends BaseController
 {
@@ -62,3 +62,5 @@ class '.$class.' extends BaseController
         }
     }
    ';
+
+$controllers_build = preg_replace('/R!@#/i', '', $controllers_build);
