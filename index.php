@@ -181,21 +181,32 @@ $button .= '
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
             <!-- Bootstrap CSS -->
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
             <link rel="stylesheet" type="text/css" href="prism.css" />
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
                 integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
                 crossorigin="anonymous" referrerpolicy="no-referrer" />
             <style>
+                body{
+                    background: rgb(81,210,163);
+background: linear-gradient(90deg, rgba(81,210,163,1) 0%, rgba(20,139,99,1) 50%, rgba(81,210,163,1) 100%);
+                }
                 .tab-pane{
                     height: 400px;
                     overflow-y: scroll;
+                }
+                .card{
+                    border-radius: 10px;
+                    border: 0px;
+                }
+                .card-header{
+                    border-radius: 10px 10px 0 0 !important;
                 }
             </style>
         </head>
         <body>
             <div class="container mt-5 mb-5">
-                <h3 class="text-center text-success"><b>Codekop CRUD PHP Basic Script Generator with Bootstrap 4-5</b>
+                <h3 class="text-center text-white"><b>Codekop CRUD PHP Basic Script Generator with Bootstrap</b>
                 </h3>
                 <br>
                 <!-- Button trigger modal -->

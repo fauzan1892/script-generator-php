@@ -1,7 +1,6 @@
 <?php
 $html_code_detail .= '
-<div class="table-responsive">
-';
+<div class="table-responsive">';
     // for kolom crud laravel --
     for ($i = 0; $i < $kolom->columnCount(); $i++) {
         $col = $kolom->getColumnMeta($i);
@@ -12,17 +11,15 @@ $html_code_detail .= '
         if($col['name']  != 'id')
         {
 $html_code_detail .= '      
-        <div class="row mt-3">
-            <div class="col-sm-4">'.$label.'</div>
-            <div class="col-sm-8"><?= $edit->'.$col['name'].';?></div>
-        </div>
+    <div class="row mt-3">
+        <div class="col-sm-4">'.$label.'</div>
+        <div class="col-sm-8"><?= $edit->'.$col['name'].';?></div>
+    </div>
 ';  
         }
     }
 
-$html_code_detail .= '
-</div>
-';
+$html_code_detail .= '</div>';
 
 $html_code_detail .= '
 

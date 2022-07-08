@@ -8,8 +8,7 @@ $html_code_detail .= '
     $edit = $row->fetch(PDO::FETCH_OBJ);
 ?>
 
-<div class="table-responsive">
-';
+<div class="table-responsive">';
     // for kolom crud laravel --
     for ($i = 0; $i < $kolom->columnCount(); $i++) {
         $col = $kolom->getColumnMeta($i);
@@ -28,9 +27,7 @@ $html_code_detail .= '
         }
     }
 
-$html_code_detail .= '
-</div>
-';
+$html_code_detail .= '</div>';
 
 $html_code_detail .= '
 
