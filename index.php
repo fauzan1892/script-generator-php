@@ -1,13 +1,14 @@
 <?php
 /**
  * 
- * Author    : Fauzan Falah ( Anang )
+ * Author    : Fauzan Falah
  * File      : index.php
  * Web Name  : Codekop CRUD PHP Script Generator with Bootstrap 4-5
  * Version   : v1.0.0
  * Website   : https://www.codekop.com/
+ * Github    : https://github.com/fauzan1892
  * Facebook  : https://www.facebook.com/fauzan.falah2  
- * HP/WA	 : +6289618173609
+ * HP/WA	 : +6281298669897
  * E-mail 	 : codekop157@gmail.com / fauzancodekop@gmail.com / fauzan1892@codekop.com
  * 
  * 
@@ -15,32 +16,49 @@
 error_reporting(1);
 if(!empty($_GET['get']))
 {
-    // koneksi antar database ---
+    /*
+    |--------------------------------------------------------------------------
+    | DB Connections
+    |--------------------------------------------------------------------------
+    |
+    */
     $dbhost = $_POST['host']; // set the hostname
     $dbname = $_POST['dbname']; // set the database name
     $dbuser = $_POST['user']; // set the mysql username
     $dbpass = $_POST['pass'];  // set the mysql password
 
     try {
-        $koneksi = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-        $koneksi->exec("set names utf8");
-        $koneksi->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $dbConnect = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+        $dbConnect->exec("set names utf8");
+        $dbConnect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
     catch (PDOException $e) {
         return 'Connection failed : ' . $e->getMessage();
     }
 
-    // https://stackoverflow.com/questions/5428262/php-pdo-get-the-columns-name-of-a-table
-    
-    // table sql ---
+    /*
+    |--------------------------------------------------------------------------
+    | Tabel SQL
+    |--------------------------------------------------------------------------
+    |
+    | Reference : https://stackoverflow.com/questions/5428262/php-pdo-get-the-columns-name-of-a-table
+    |
+    */
     $table = $_POST['table'];
     $class = ucfirst($_POST['table']);
     $baseurl = $_POST['url'];
-    $kolom = $koneksi->prepare("SELECT * FROM $table LIMIT 0");
+    $kolom = $dbConnect->prepare("SELECT * FROM $table LIMIT 0");
     $kolom->execute();
 
+    /*
+    |--------------------------------------------------------------------------
+    | START GENERATE CODE
+    |--------------------------------------------------------------------------
+    |
+    */
+    
+    // PHP PDO Code Generator ( EDIT FORM HTML CODE )
     if(($_POST['type'] == '5')) {
-    // tipe input pakai php native ---
     $html_code_update .= '
     <?php
         $id =  (int)$_POST["id"];
@@ -51,13 +69,13 @@ if(!empty($_GET['get']))
     ?>
     ';
     }
-    // for basic form ---
+
+    // BASIC FORM HTML CODE
     for ($i = 0; $i < $kolom->columnCount(); $i++) {
         $col = $kolom->getColumnMeta($i);
         $col['name'];
         // echo $col['native_type'].' =>'.$col['name'].'<br>';
         $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
-
         //tipe kolom
         if($col['native_type'] == 'LONG')
         {
@@ -72,24 +90,28 @@ if(!empty($_GET['get']))
             $type = 'text';
         }
 
-        if($col['name'] != 'id')
-        {
-        // tipe pakai laravel ---
+        // START GENERATE FORM HTML CODE
+        // if($col['name'] != 'id')
+        // {
+            // LARAVEL 
             if(($_POST['type'] == '4')){
-                // tipe input pakai laravel ---
                 include 'generate/laravel/html.php';
+            // PHP PDO 
             }elseif(($_POST['type'] == '5')) {
-                // tipe input pakai php native ---
                 include 'generate/native/html.php';
+            // CodeIgniter 4
+            }else  if(($_POST['type'] == '3')){
+                include 'generate/ci4/html.php';
+            // CodeIgniter 3
             }else{
-                // tipe input pakai codeigniter 3 ---
                 include 'generate/ci3/html.php';
             }
-        }
+        // }
+        // END GENERATE FORM HTML CODE
     }
-    // tipe pakai laravel ---
+    
+    // LARAVEL
     if(($_POST['type'] == '4')){
-        // tipe input pakai laravel ---
         include 'generate/laravel/controller.php';
         include 'generate/laravel/detail.php';
         include 'generate/laravel/crud.php';
@@ -98,8 +120,8 @@ if(!empty($_GET['get']))
         $sc = 'Laravel';
         $formmethod = "<form method='POST' action='{{ url('') }}'> @csrf";
 
+    // PHP PDO
     }else if(($_POST['type'] == '5')){
-        // tipe input pakai php native ---
         include 'generate/native/detail.php';
         include 'generate/native/crud.php';
         include 'generate/native/tabel.php';
@@ -107,8 +129,8 @@ if(!empty($_GET['get']))
         $sc = 'PHP Native';
         $formmethod = "<form method='POST' action=''>";
 
+    // CodeIgniter 4
     }else  if(($_POST['type'] == '3')){
-        // tipe input pakai codeigniter 4 ---
         include 'generate/ci4/controller.php';
         include 'generate/ci4/crud.php';
         include 'generate/ci4/detail.php';
@@ -116,8 +138,9 @@ if(!empty($_GET['get']))
 
         $sc = 'CodeIgniter 4';
         $formmethod = "<form method='POST' action='<?= base_url('');?>'>";
+
+    // CodeIgniter 3
     }else{
-        // tipe input pakai codeigniter 3 ---
         include 'generate/ci3/controller.php';
         include 'generate/ci3/crud.php';
         include 'generate/ci3/detail.php';
@@ -127,23 +150,26 @@ if(!empty($_GET['get']))
         $formmethod = "<form method='POST' action='<?= base_url('');?>'>";
 
     }
-    // for basic form ---
+
+    // Button Generate HTML Code
     if(!empty($_POST['category'] == '1')){
-        // button tipe left
-        $button = '<button class="btn btn-primary btn-md">Save</button></form>';
+        // LEFT
+        $button .= '<button type="submit" class="btn btn-primary btn-md">Save</button>';
     }else{
-        // button tipe right
-        $button = '<button class="btn btn-primary btn-md float-right">Save</button></form>';
+        // RIGHT
+        $button .= '<button class="btn btn-primary btn-md float-right">Save</button>';
     }
 
-        // array from CRUD
+    // Array from CRUD
     if(!empty($_POST['array'] == '2'))
     {
         include 'crud_array.php';
     }else{
         $html_array = 'No Result';
     }
-    // end crud laravel --
+$button .= '
+</form>';
+    // END GENERATE CODE
 }
 ?>
 <!doctype html>
@@ -161,13 +187,10 @@ if(!empty($_GET['get']))
                 integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
                 crossorigin="anonymous" referrerpolicy="no-referrer" />
             <style>
-            body {
-                background: #222;
-            }
-
-            .card {
-                border: 2px solid #222;
-            }
+                .tab-pane{
+                    height: 400px;
+                    overflow-y: scroll;
+                }
             </style>
         </head>
         <body>

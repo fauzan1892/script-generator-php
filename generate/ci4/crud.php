@@ -80,9 +80,9 @@ $html_update .= "           '".$col['name']."' => ".'date("Y-m-d H:i:s"),
 ';
                 }else{
                     
-$html_insert .= "           '".$col['name']."' => ".'$this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_STRING),
+$html_insert .= "           '".$col['name']."' => ".'$this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_FULL_SPECIAL_CHARS),
     ';   
-$html_update .= "           '".$col['name']."' => ".'$this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_STRING),
+$html_update .= "           '".$col['name']."' => ".'$this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_FULL_SPECIAL_CHARS),
     ';  
                 }
             }

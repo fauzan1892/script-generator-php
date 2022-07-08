@@ -1,3 +1,16 @@
+<?php if(isset($_GET['get'])){?>
+<script>
+    $(document).ready(function () {
+        let user = '<?= $_POST['user'];?>';
+        let host = '<?= $_POST['host'];?>';
+        let pass = '<?= $_POST['pass'];?>';
+        let dbname = '<?= $_POST['dbname'];?>';
+        let table = '<?= $_POST['table'];?>';
+        prosesListDB(user, host, pass, dbname);
+        prosesListTable(user, host, pass, dbname, table);
+    });
+</script>
+<?php }?>
 <script>
     // change the value of the input field jquery
     $(document).ready(function () {
@@ -22,7 +35,7 @@
         });
     });
 
-    function prosesListDB(user, host, pass) {
+    function prosesListDB(user, host, pass, dbname = null) {
         // create ajax
         $.ajax({
             url: 'php/cekdb.php',
@@ -41,7 +54,11 @@
                     .append('<option value="" disabled>Select DB Name</option>')
                     .val('');
                 $.each(result, function (i, data) {
-                    $('#dbname').append('<option>' + data + '</option>');
+                    if(dbname == data) {
+                        $('#dbname').append('<option selected>' + data + '</option>');
+                    }else{
+                        $('#dbname').append('<option>' + data + '</option>');
+                    }
                 });
             },
             error: function (request, status, error) {
@@ -50,7 +67,7 @@
         });
     }
 
-    function prosesListTable(user, host, pass, dbname) {
+    function prosesListTable(user, host, pass, dbname, table = null) {
         // create ajax
         $.ajax({
             url: 'php/cektable.php',
@@ -70,7 +87,11 @@
                     .append('<option value="" disabled>Select DB Name</option>')
                     .val('');
                 $.each(result, function (i, data) {
-                    $('#table').append('<option>' + data + '</option>');
+                    if(table == data) {
+                        $('#table').append('<option selected>' + data + '</option>');
+                    }else{
+                        $('#table').append('<option>' + data + '</option>');
+                    }
                 });
             },
             error: function (request, status, error) {
