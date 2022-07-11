@@ -40,7 +40,7 @@ class '.$class.' extends CI_Controller {
 
     public function edit($id)
     {
-        $cek = $this->db->get_where("'.$table.'",["" => $id]);
+        $cek = $this->db->get_where("'.$table.'",["id" => $id]);
         if($cek->num_rows() > 0){
             $edit = $cek->row();
             $this->data["edit"] = $edit;
@@ -50,7 +50,7 @@ class '.$class.' extends CI_Controller {
             // $this->load->view("layouts/app",$this->data);
 			$this->load->view("contents/'.$baseurl.'/edit",$this->data);
         }else{
-            echo "<br><h4 class="text-center"> Data Not Found !</h4><br>";
+            echo "<br><h4 class=text-center> Data Not Found !</h4><br>";
             // $this->session->set_flashdata("success"," Data Not Found ! ");
             // redirect(base_url("'.$baseurl.'"));
         }

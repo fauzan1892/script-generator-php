@@ -188,8 +188,7 @@ $button .= '
                 crossorigin="anonymous" referrerpolicy="no-referrer" />
             <style>
                 body{
-                    background: rgb(81,210,163);
-background: linear-gradient(90deg, rgba(81,210,163,1) 0%, rgba(20,139,99,1) 50%, rgba(81,210,163,1) 100%);
+                    background: rgba(20,139,99,1);
                 }
                 .tab-pane{
                     height: 400px;
