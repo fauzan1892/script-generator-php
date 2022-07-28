@@ -3,13 +3,11 @@
 $html_insert .= '
     public function store()
     {
-        $val = $this->validate([
     ';
 $html_update .= '
 
     public function update()
     {
-        $val = $this->validate([
     ';
 $html_delete .= '
 
@@ -42,27 +40,22 @@ $html_delete .= '
             if($col['name']  != 'id')
             {
                 if($col['native_type'] == 'TIMESTAMP') { }else{
-$html_insert .= '           "'.$col['name'].'" => "required",
-';  
-$html_update .= '           "'.$col['name'].'" => "required",
-';  
+$html_insert .= '
+        $validate["'.$col['name'].'"] = "required";';         
+$html_update .= '
+        $validate["'.$col['name'].'"] = "required";';      
                 }
             }
         }
-
 $html_insert .= '
-        ]);
+        $val = $this->validate($validate);
 
-        if($val)
-        {
-            $data = [
+        if($val){
     ';
 $html_update .= '
-        ]);
+        $val = $this->validate($validate);
         
-        if($val)
-        {
-            $data = [
+        if($val){
     ';
         // for kolom codeigniter 3 ---
         for ($i = 0; $i < $kolom->columnCount(); $i++) {
@@ -74,21 +67,20 @@ $html_update .= '
             {
                 if($col['native_type'] == 'TIMESTAMP')
                 {
-$html_insert .= "           '".$col['name']."' => ".'date("Y-m-d H:i:s"),
-';   
-$html_update .= "           '".$col['name']."' => ".'date("Y-m-d H:i:s"),
-';
+$html_insert .= '
+            $data["'.$col['name'].'"] = date("Y-m-d H:i:s");';
+$html_update .= '   
+            $data["'.$col['name'].'"] = date("Y-m-d H:i:s");';
                 }else{
-                    
-$html_insert .= "           '".$col['name']."' => ".'$this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-    ';   
-$html_update .= "           '".$col['name']."' => ".'$this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_FULL_SPECIAL_CHARS),
-    ';  
+              
+$html_insert .= '
+            $data["'.$col['name'].'"] = $this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_FULL_SPECIAL_CHARS);';         
+$html_update .= '
+            $data["'.$col['name'].'"] = $this->request->getPost("'.$col['name'].'", FILTER_SANITIZE_FULL_SPECIAL_CHARS);';      
                 }
             }
         }
 $html_insert .= '
-            ];
 
             $builder = $this->db->table("'.$table.'");
             $builder->insert($data);
@@ -102,7 +94,6 @@ $html_insert .= '
         }
     }';
 $html_update .= '
-            ];
 
             $builder = $this->db->table("'.$table.'");
             $builder->where("id", $this->request->getPost("id"));
