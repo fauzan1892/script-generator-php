@@ -1,5 +1,6 @@
 <?php
 $html_code_detail .= '
+<!--DETAIL ROW -->
 <div class="table-responsive">';
     // for kolom crud laravel --
     for ($i = 0; $i < $kolom->columnCount(); $i++) {
@@ -14,20 +15,17 @@ $html_code_detail .= '
     <div class="row mt-3">
         <div class="col-sm-4">'.$label.'</div>
         <div class="col-sm-8"><?= $edit->'.$col['name'].';?></div>
-    </div>
-';  
+    </div>';  
         }
     }
 
-$html_code_detail .= '</div>';
-
 $html_code_detail .= '
-
-
+</div>
+<!--END DETAIL ROW -->
+<!-- TABLE DETAIL -->
 <div class="table-responsive">
     <table class="table table-striped">
-        <tbody>
-';
+        <tbody>';
     // for kolom crud laravel --
     for ($i = 0; $i < $kolom->columnCount(); $i++) {
         $col = $kolom->getColumnMeta($i);
@@ -41,8 +39,7 @@ $html_code_detail .= '
             <tr>
                 <th>'.$label.'</th>
                 <td><?= $edit->'.$col['name'].';?></td>
-            </tr>
-';  
+            </tr>';  
         }
     }
 
@@ -50,4 +47,5 @@ $html_code_detail .= '
         </tbody>
     </table>
 </div>
+<!-- END TABLE DETAIL -->
 ';
