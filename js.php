@@ -101,3 +101,15 @@
     } 
     
 </script>
+<script>
+    function copyFunction(idCopy) {
+        const copyText = document.getElementById(idCopy).textContent;
+        const textArea = document.createElement('textarea');
+        textArea.textContent = copyText;
+        document.body.append(textArea);
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+        alert('Copy Success !');
+    }
+</script>

@@ -45,7 +45,7 @@ if(!empty($_GET['get']))
     |
     */
     $table = $_POST['table'];
-    $class = ucfirst($_POST['table']);
+    $class = ucwords($_POST['table']);
     $baseurl = $_POST['url'];
     $kolom = $dbConnect->prepare("SELECT * FROM $table LIMIT 0");
     $kolom->execute();
@@ -75,7 +75,7 @@ if(!empty($_GET['get']))
         $col = $kolom->getColumnMeta($i);
         $col['name'];
         // echo $col['native_type'].' =>'.$col['name'].'<br>';
-        $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
+        $label = ucwords(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
         //tipe kolom
         if($col['native_type'] == 'LONG')
         {
@@ -118,7 +118,7 @@ if(!empty($_GET['get']))
         include 'generate/laravel/tabel.php';
 
         $sc = 'Laravel';
-        $formmethod = "<form method='POST' action='{{ url('') }}'> @csrf";
+        $formmethod = '<form method="POST" action="{{ url("'.$baseurl.'") }}"> @csrf';
 
     // PHP PDO
     }else if(($_POST['type'] == '5')){
@@ -137,7 +137,7 @@ if(!empty($_GET['get']))
         include 'generate/ci4/tabel.php';
 
         $sc = 'CodeIgniter 4';
-        $formmethod = "<form method='POST' action='<?= base_url('');?>'>";
+        $formmethod = '<form method="POST" action="<?= base_url("'.$baseurl.'");?>">';
 
     // CodeIgniter 3
     }else{
@@ -147,7 +147,7 @@ if(!empty($_GET['get']))
         include 'generate/ci3/tabel.php';
 
         $sc = 'CodeIgniter 3';
-        $formmethod = "<form method='POST' action='<?= base_url('');?>'>";
+        $formmethod = '<form method="POST" action="<?= base_url("'.$baseurl.'");?>">';
 
     }
 
@@ -476,28 +476,58 @@ $button .= '
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="create" role="tabpanel"
                                         aria-labelledby="create-tab">
-                                        <pre
+                                        <button id="buttonController" 
+                                            onclick="copyFunction('preCreate')" 
+                                            class="btn btn-secondary btn-sm mt-3 mb-2">
+                                            <i class="fas fa-copy mr-1"></i> Copy All
+                                        </button>
+                                        <pre id="preCreate"
                                             class="language-php"><code><?= htmlspecialchars($formmethod);?><?= htmlspecialchars($html_code);?><?= htmlspecialchars($button);?></code></pre>
                                     </div>
                                     <div class="tab-pane fade" id="edite" role="tabpanel" aria-labelledby="edite-tab">
-                                        <pre
+                                        <button id="buttonController" 
+                                            onclick="copyFunction('preEdit')" 
+                                            class="btn btn-secondary btn-sm mt-3 mb-2">
+                                            <i class="fas fa-copy mr-1"></i> Copy All
+                                        </button>
+                                        <pre id="preEdit"
                                             class="language-php"><code><?= htmlspecialchars($formmethod);?><?= htmlspecialchars($html_code_update);?><?= htmlspecialchars($button);?></code></pre>
                                     </div>
                                     <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="detail-tab">
-                                        <pre
+                                        <button id="buttonController" 
+                                            onclick="copyFunction('preDetail')" 
+                                            class="btn btn-secondary btn-sm mt-3 mb-2">
+                                            <i class="fas fa-copy mr-1"></i> Copy All
+                                        </button>
+                                        <pre id="preDetail" 
                                             class="language-php"><code><?= htmlspecialchars($html_code_detail);?></code></pre>
                                     </div>
                                     <div class="tab-pane fade" id="table12" role="tabpanel" aria-labelledby="table-tab">
-                                        <pre
+                                        <button id="buttonController" 
+                                            onclick="copyFunction('preTable')" 
+                                            class="btn btn-secondary btn-sm mt-3 mb-2">
+                                            <i class="fas fa-copy mr-1"></i> Copy All
+                                        </button>
+                                        <pre id="preTable" 
                                             class="language-php"><code><?= htmlspecialchars($html_code_tabel);?></code></pre>
                                     </div>
                                     <div class="tab-pane fade" id="array" role="tabpanel" aria-labelledby="array-tab">
-                                        <pre
+                                        <button id="buttonController" 
+                                            onclick="copyFunction('preArray')" 
+                                            class="btn btn-secondary btn-sm mt-3 mb-2">
+                                            <i class="fas fa-copy mr-1"></i> Copy All
+                                        </button>
+                                        <pre id="preArray" 
                                             class="language-php"><code><?= htmlspecialchars($html_array);?></code></pre>
                                     </div>
                                     <div class="tab-pane fade" id="controller" role="tabpanel"
                                         aria-labelledby="controller-tab">
-                                        <pre
+                                        <button id="buttonController" 
+                                            onclick="copyFunction('preController')" 
+                                            class="btn btn-secondary btn-sm mt-3 mb-2">
+                                            <i class="fas fa-copy mr-1"></i> Copy All
+                                        </button>
+                                        <pre id="preController"
                                             class="language-php"><code>
                                             <?= htmlspecialchars($controllers_build ?? '');?>
                                             <?= htmlspecialchars($html_insert);?>
@@ -505,11 +535,21 @@ $button .= '
                                             <?= htmlspecialchars($html_delete);?></code></pre>
                                     </div>
                                     <div class="tab-pane fade" id="model" role="tabpanel" aria-labelledby="model-tab">
-                                        <pre
+                                        <button id="buttonController" 
+                                            onclick="copyFunction('preModel')" 
+                                            class="btn btn-secondary btn-sm mt-3 mb-2">
+                                            <i class="fas fa-copy mr-1"></i> Copy All
+                                        </button>
+                                        <pre id="preArray" 
                                             class="language-php"><code></code></pre>
                                     </div>
                                     <div class="tab-pane fade" id="route" role="tabpanel" aria-labelledby="route-tab">
-                                        <pre
+                                        <button id="buttonController" 
+                                            onclick="copyFunction('preRoute')" 
+                                            class="btn btn-secondary btn-sm mt-3 mb-2">
+                                            <i class="fas fa-copy mr-1"></i> Copy All
+                                        </button>
+                                        <pre id="preRoute" 
                                             class="language-php"><code></code></pre>
                                     </div>
                                     <!-- <div class="tab-pane fade" id="insert" role="tabpanel"
