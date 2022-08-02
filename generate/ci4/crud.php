@@ -1,16 +1,20 @@
 <?php
 
 $html_insert .= '
+    /* Store a newly created resource in storage. */
     public function store()
     {
     ';
 $html_update .= '
 
+    /* Update the specified resource in storage. */
     public function update()
     {
+        $id =  base64_decode($this->request->getPost("id")); 
     ';
 $html_delete .= '
 
+    /* Remove the specified resource from storage. */
     public function delete($id)
     {
         $edit = $this->'.$table.'->get'.$class.'($id)->getRow();
@@ -96,7 +100,7 @@ $html_insert .= '
 $html_update .= '
 
             $builder = $this->db->table("'.$table.'");
-            $builder->where("id", $this->request->getPost("id"));
+            $builder->where("id", $id);
             $builder->update($data);
             $this->session->setFlashdata("success"," Berhasil Update Data ! ");
             return redirect()->to(base_url("'.$baseurl.'/edit/".$id));

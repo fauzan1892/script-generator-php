@@ -50,7 +50,7 @@ $html_code_tabel .= '
                             class="btn btn-success btn-sm" title="Edit">
                             <i class="fa fa-edit"></i> 
                         </a> 
-                        <a href="<?= base_url("'.$baseurl.'/delete?id=".base64_encode($r->id));?>" 
+                        <a href="<?= base_url("'.$baseurl.'/delete/".base64_encode($r->id));?>" 
                             class="btn btn-danger btn-sm" 
                             onclick="javascript:return confirm(`Data ingin dihapus ?`);" title="Delete">
                             <i class="fa fa-times"></i> 

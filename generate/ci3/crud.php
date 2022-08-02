@@ -13,9 +13,9 @@ $html_update .= '
 $html_delete .= '
     
     /* Remove the specified resource from storage. */
-    public function delete()
+    public function delete($id)
     {
-        $id = base64_decode($this->input->get("id"));
+        $id = base64_decode($id);
         $cek = $this->db->get_where("'.$table.'",["id" => $id]); // where id parameters
         if($cek->num_rows() > 0)
         {
