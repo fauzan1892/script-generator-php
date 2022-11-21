@@ -3,6 +3,9 @@ if($type == 'textarea')
 {
     $inputmode = '<textarea class="form-control" name="'.$col['name'].'" id="'.$col['name'].'" placeholder=""></textarea>';
     $inputmode_update = '<textarea class="form-control" name="'.$col['name'].'" id="'.$col['name'].'" placeholder=""><?= $edit->'.$col['name'].';?></textarea>';
+}else if($type == 'enum'){
+    $inputmode = '<select class="form-control" name="'.$col['name'].'" id="'.$col['name'].'"><option value="" disabled selected">Pilih '.$label.'</option></select>';
+    $inputmode_update = '<select class="form-control" name="'.$col['name'].'" id="'.$col['name'].'"><option value="" disabled selected">Pilih '.$label.'</option><option><?= $edit->'.$col['name'].';?></option></select>';
 }else{
     $inputmode = '<input type="'.$type.'" class="form-control" name="'.$col['name'].'" id="'.$col['name'].'" placeholder="">';
     $inputmode_update = '<input type="'.$type.'" class="form-control" value="<?= $edit->'.$col['name'].';?>" name="'.$col['name'].'" id="'.$col['name'].'" placeholder=""/>';

@@ -80,6 +80,8 @@ if(!empty($_GET['get']))
         if($col['native_type'] == 'LONG')
         {
             $type = 'number';
+        }else if($col['native_type'] == 'STRING'){
+            $type = 'enum';
         }else if($col['native_type'] == 'BLOB'){
             $type = 'textarea';
         }else if($col['native_type'] == 'DATE'){
