@@ -18,7 +18,6 @@ $html_code_detail .= '
     </div>';  
         }
     }
-
 $html_code_detail .= '
 </div>
 <!--END DETAIL ROW -->
@@ -48,4 +47,38 @@ $html_code_detail .= '
     </table>
 </div>
 <!-- END TABLE DETAIL -->
+
+<script>
+    // response jquery
+    ';
+    // for kolom crud laravel --
+    for ($i = 0; $i < $kolom->columnCount(); $i++) {
+        $col = $kolom->getColumnMeta($i);
+        $col['name'];
+        // echo $col['native_type'].' =>'.$col['name'].'<br>';
+        $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
+
+        if($col['name']  != 'id')
+        {
+$html_code_detail .= '      
+            $("#'.$col['name'].'").val('.$col['name'].');';
+        }
+    }
+$html_code_detail .= '</script>
+// response jquery    
+<?php 
 ';
+// for kolom crud laravel --
+for ($i = 0; $i < $kolom->columnCount(); $i++) {
+    $col = $kolom->getColumnMeta($i);
+    $col['name'];
+    // echo $col['native_type'].' =>'.$col['name'].'<br>';
+    $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
+
+    if($col['name']  != 'id')
+    {
+$html_code_detail .= '  
+        $spreadsheet->getActiveSheet()->setCellValue("D ".($personalIdx+'.$i.'), "'.$label.'");
+        $spreadsheet->getActiveSheet()->setCellValueByColumnAndRow(2, ($personalIdx+'.$i.'), ":  ".$dataBio["'.$col['name'].'"]);';
+    }
+}
