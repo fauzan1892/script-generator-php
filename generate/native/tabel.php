@@ -48,18 +48,12 @@ $html_code_tabel .= '
         }
     $html_code_tabel .= '
                 <td>
-                    <a href="<?= $baseUrl."'.$baseurl.'/detail.php?id=".$r->id;?>" 
-                        class="btn btn-primary btn-sm" title="Detail">
-                        <i class="fa fa-eye"></i> 
-                    </a> 
-                    <a href="<?= $baseUrl."'.$baseurl.'/edit.php?id=".$r->id;?>" 
-                        class="btn btn-success btn-sm" title="Edit">
-                        <i class="fa fa-edit"></i> 
-                    </a> 
-                    <a href="<?= $baseUrl."'.$baseurl.'/hapus.php?id=".$r->id;?>" 
-                        class="btn btn-danger btn-sm" 
+                    <a href="<?= "edit.php?id=" . $r->id; ?>" class="btn btn-success btn-sm" title="Edit">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="<?= "proses.php?aksi=delete&id=" . $r->id; ?>" class="btn btn-danger btn-sm"
                         onclick="javascript:return confirm(`Data ingin dihapus ?`);" title="Delete">
-                        <i class="fa fa-times"></i> 
+                        <i class="fa fa-times"></i>
                     </a>
                 </td>
             </tr>

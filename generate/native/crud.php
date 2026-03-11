@@ -42,9 +42,9 @@ $html_delete .= '
     // echo $col['native_type'].' =>'.$col['name'].'<br>';
     $label = ucfirst(preg_replace('/[^a-zA-Z0-9\']/', ' ', $col['name']));
 
-$html_insert .= '     $data[] =  htmlspecialchars($_POST["'.$col['name'].'"]);
+$html_insert .= '     $data[] =  getPost("'.$col['name'].'", true);
 ';   
-$html_update .= '     $data[] =  htmlspecialchars($_POST["'.$col['name'].'"]);
+$html_update .= '     $data[] =  getPost("'.$col['name'].'", true);
 ';    
         }
 
